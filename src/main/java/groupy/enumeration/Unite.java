@@ -1,0 +1,12 @@
+package groupy.enumeration;
+
+public enum Unite {
+	
+	FARFADETS,
+	LOUVETEAUX_JEANNETTES,
+	SCOUTS_GUIDES,
+	PIONNIERS_CARAVELLES,
+	COMPAGNONS,
+	GROUPE,
+	CLEOPHAS;
+}

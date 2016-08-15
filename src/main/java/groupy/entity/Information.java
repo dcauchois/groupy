@@ -9,13 +9,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import groupy.enumeration.Unite;
 
 @Entity
-public class Information {
+public class Information extends GenericEntity<Information> {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -37,10 +36,11 @@ public class Information {
 	@Column(nullable=false,length=2000)
 	private String commentaire;
 
+	@Override
 	public Long getIdentifiant() {
-		return identifiant;
+		 return this.identifiant;
 	}
-
+	
 	public Date getDate() {
 		return date;
 	}
@@ -79,6 +79,11 @@ public class Information {
 
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
+	}
+
+	@Override
+	public void setAll(Information entity) {
+		
 	}
 	
 	

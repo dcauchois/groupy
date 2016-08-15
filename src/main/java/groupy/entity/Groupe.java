@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Groupe {
+public class Groupe extends GenericEntity<Groupe>{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -24,12 +24,13 @@ public class Groupe {
 	private Territoire territoire;
 	
 	@OneToMany(mappedBy="groupe")
-	private List<Information> informations;
+	private List<Information> informations;	
 
+	@Override
 	public Long getIdentifiant() {
-		return identifiant;
+		 return this.identifiant;
 	}
-
+	
 	public String getLibelle() {
 		return libelle;
 	}
@@ -91,6 +92,13 @@ public class Groupe {
 		return "?";
 		
 	}
-	
-	
+
+	@Override
+	public void setAll(Groupe entity) {
+		if(entity!=null){
+			setLibelle(entity.getLibelle());
+			setTerritoire(entity.getTerritoire());
+		}
+		
+	}
 }

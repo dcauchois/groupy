@@ -18,7 +18,7 @@ public class TerritoireServiceTestCase {
 	
 	@Test
 	public void shouldCreateTerritoire(){
-		territoireService.createTerritoire(new Territoire("Territoire Test 1"));
+		territoireService.create(new Territoire("Territoire Test 1"));
 	}
 	
 	

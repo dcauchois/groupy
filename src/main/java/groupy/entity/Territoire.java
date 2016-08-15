@@ -10,13 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Territoire{
+public class Territoire extends GenericEntity<Territoire>{
 
 	public Territoire(String libelle) {
 		super();
 		this.libelle = libelle;
 	}
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long identifiant;
@@ -27,10 +27,12 @@ public class Territoire{
 	@OneToMany(mappedBy="territoire")
 	private List<Groupe> groupes;
 
+	@Override
 	public Long getIdentifiant() {
-		return identifiant;
+		 return this.identifiant;
 	}
-
+	
+	
 	public String getLibelle() {
 		return libelle;
 	}
@@ -78,5 +80,14 @@ public class Territoire{
 			return libelle;
 		}
 		return "?";
+	}
+
+	@Override
+	public void setAll(Territoire entity) {
+		if(entity!=null){
+			setLibelle(entity.getLibelle());
+
+		}
+		
 	}
 }

@@ -9,14 +9,25 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Utilisateur {
-
+public class Utilisateur extends GenericEntity<Utilisateur>{
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long identifiant;
 	
 	@OneToMany(mappedBy="rapporteur")
 	private List<Information> informationsRapportees;
+
+	@Override
+	public Long getIdentifiant() {
+		 return this.identifiant;
+	}
+	
+	@Override
+	public void setAll(Utilisateur entity) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

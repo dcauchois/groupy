@@ -39,5 +39,4 @@ public class StructureServiceImpl extends GenericServiceImpl<Structure> implemen
 	Logger getLogger() {
 		return LOGGER;
 	}
-
 }

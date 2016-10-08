@@ -2,12 +2,14 @@ package groupy.entity;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+@Entity
 public class Equipe extends GenericEntity<Equipe> {
 
 	@Id
@@ -19,7 +21,7 @@ public class Equipe extends GenericEntity<Equipe> {
 	@ManyToOne
 	private Structure structure;
 	
-	@OneToMany
+	@OneToMany(mappedBy="equipe")
 	private List<Information> informations;
 	
 	@Override

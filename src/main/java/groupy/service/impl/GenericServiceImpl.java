@@ -1,6 +1,9 @@
 package groupy.service.impl;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 
@@ -62,6 +65,16 @@ public abstract class GenericServiceImpl<Entity extends GenericEntity<Entity>> i
 		
 	}
 	
+	@Override
+	public List<Entity> retrieveAll(){
+		List<Entity> entities = new ArrayList<Entity>();
+		for(Entity entity : getDao().findAll()){
+			entities.add(entity);
+		}
+		return entities;
+	}
+
+	
 	private boolean exists(Entity entity){
 		for(Entity currentEntity : getDao().findAll()){
 			if(currentEntity.equals(entity)){
@@ -70,5 +83,6 @@ public abstract class GenericServiceImpl<Entity extends GenericEntity<Entity>> i
 		}
 		return false;
 	}
-
+	
+	
 }

@@ -1,5 +1,7 @@
 package groupy.service;
 
+import java.util.List;
+
 import groupy.entity.Structure;
 import groupy.exception.EntityNotFoundException;
 

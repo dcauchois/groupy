@@ -1,6 +1,8 @@
 package groupy.service;
 
 
+import java.util.List;
+
 import groupy.entity.GenericEntity;
 import groupy.exception.EntityExistsException;
 import groupy.exception.EntityNotFoundException;
@@ -14,5 +16,7 @@ public interface GenericService<Entity extends GenericEntity<Entity>>{
 	void update(Long identifiant, Entity entity) throws EntityNotFoundException;
 	
 	void delete(Long identifiant) throws EntityNotFoundException;
+	
+	List<Entity> retrieveAll();
 
 }

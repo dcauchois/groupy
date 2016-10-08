@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Groupe extends GenericEntity<Groupe>{
+public class Structure extends GenericEntity<Structure>{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,16 +20,29 @@ public class Groupe extends GenericEntity<Groupe>{
 	@Column(unique=true, nullable=false)
 	private String libelle;
 	
-	@ManyToOne
-	private Territoire territoire;
-	
-	@OneToMany(mappedBy="groupe")
+	@OneToMany(mappedBy="structure")
 	private List<Information> informations;	
+	
+	@ManyToOne
+	private Structure structureMere;
+	
+	@OneToMany(mappedBy="structureMere")
+	private List<Structure> structuresFilles;	
 
 	@Override
 	public Long getIdentifiant() {
 		 return this.identifiant;
 	}
+	
+	public Structure(){
+		super();
+	}
+	
+	public Structure(String libelle){
+		this();
+		this.libelle = libelle;
+	}
+	
 	
 	public String getLibelle() {
 		return libelle;
@@ -39,66 +52,59 @@ public class Groupe extends GenericEntity<Groupe>{
 		this.libelle = libelle;
 	}
 
-	public Territoire getTerritoire() {
-		return territoire;
+	public List<Information> getInformations() {
+		return informations;
 	}
 
-	public void setTerritoire(Territoire territoire) {
-		this.territoire = territoire;
+	public void setInformations(List<Information> informations) {
+		this.informations = informations;
+	}
+
+	public Structure getStructureMere() {
+		return structureMere;
+	}
+
+	public void setStructureMere(Structure structureMere) {
+		this.structureMere = structureMere;
+	}
+
+	public List<Structure> getStructuresFilles() {
+		return structuresFilles;
+	}
+
+	public void setStructuresFilles(List<Structure> structuresFilles) {
+		this.structuresFilles = structuresFilles;
+	}
+	
+	@Override
+	public void setAll(Structure entity) {
+		if(entity!=null){
+			this.setLibelle(entity.getLibelle());
+			this.setInformations(entity.getInformations());
+			this.setStructureMere(entity.getStructureMere());
+			this.setStructuresFilles(entity.getStructuresFilles());
+		}
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
-		result = prime * result + ((territoire == null) ? 0 : territoire.hashCode());
-		return result;
+	public boolean equals(Structure entity) {
+		if(entity != null){
+			Structure structureMere = entity.getStructureMere();
+			if(structureMere == null && this.getStructureMere()==null){
+				return this.libelle.equals(entity.getLibelle());
+			}
+			else if(structureMere.equals(this.getStructureMere())){
+				return this.libelle.equals(entity.getLibelle());
+			}
+		}
+		return false;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Groupe other = (Groupe) obj;
-		if (libelle == null) {
-			if (other.libelle != null)
-				return false;
-		} else if (!libelle.equals(other.libelle))
-			return false;
-		if (territoire == null) {
-			if (other.territoire != null)
-				return false;
-		} else if (!territoire.equals(other.territoire))
-			return false;
-		return true;
-	}
-
+	
 	@Override
 	public String toString() {
-		if(libelle!=null){
-			String libelleTerritoire="?";
-			if(territoire!=null){
-				libelleTerritoire = territoire.toString();
-			}
-		
-			return libelle + "("+libelleTerritoire+")";
-			
-		}
-		return "?";
-		
+		return this.libelle;
 	}
-
-	@Override
-	public void setAll(Groupe entity) {
-		if(entity!=null){
-			setLibelle(entity.getLibelle());
-			setTerritoire(entity.getTerritoire());
-		}
-		
-	}
+	
+	
+	
 }

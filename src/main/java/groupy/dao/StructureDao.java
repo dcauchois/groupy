@@ -2,10 +2,10 @@ package groupy.dao;
 
 import javax.transaction.Transactional;
 
-import groupy.entity.Territoire;
+import groupy.entity.Structure;
 
 @Transactional
-public interface TerritoireDao extends GenericDao<Territoire> {
+public interface StructureDao extends GenericDao<Structure> {
 
-	public Territoire findByLibelle(String libelle);
+	public Structure findByLibelle(String libelle);
 }

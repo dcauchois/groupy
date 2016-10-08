@@ -1,15 +1,18 @@
 package groupy.service;
 
+
 import groupy.entity.GenericEntity;
+import groupy.exception.EntityExistsException;
+import groupy.exception.EntityNotFoundException;
 
 public interface GenericService<Entity extends GenericEntity<Entity>>{
 	
-	void create(Entity entity);
+	void create(Entity entity) throws EntityExistsException;
 	
-	Entity retrieve(Long identifiant);
+	Entity retrieve(Long identifiant) throws EntityNotFoundException;
 
-	void update(Long identifiant, Entity entity);
+	void update(Long identifiant, Entity entity) throws EntityNotFoundException;
 	
-	void delete(Long identifiant);
+	void delete(Long identifiant) throws EntityNotFoundException;
 
 }

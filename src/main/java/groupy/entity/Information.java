@@ -4,14 +4,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import groupy.enumeration.Unite;
 
 @Entity
 public class Information extends GenericEntity<Information> {
@@ -24,16 +20,12 @@ public class Information extends GenericEntity<Information> {
 	private Date date;
 	
 	@ManyToOne
-	private Groupe groupe;
-	
-	@Column(nullable=false)
-	@Enumerated(EnumType.STRING)
-	private Unite unite;
+	private Structure structure;
 	
 	@ManyToOne
 	private Utilisateur rapporteur;
 	
-	@Column(nullable=false,length=2000)
+	@Column(nullable=false)
 	private String commentaire;
 
 	@Override
@@ -47,22 +39,6 @@ public class Information extends GenericEntity<Information> {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public Groupe getGroupe() {
-		return groupe;
-	}
-
-	public void setGroupe(Groupe groupe) {
-		this.groupe = groupe;
-	}
-
-	public Unite getUnite() {
-		return unite;
-	}
-
-	public void setUnite(Unite unite) {
-		this.unite = unite;
 	}
 
 	public Utilisateur getRapporteur() {
@@ -83,7 +59,16 @@ public class Information extends GenericEntity<Information> {
 
 	@Override
 	public void setAll(Information entity) {
-		
+		if(entity!=null){
+			this.setDate(entity.getDate());
+			this.setCommentaire(entity.getCommentaire());
+			this.setRapporteur(entity.getRapporteur());
+		}
+	}
+
+	@Override
+	public boolean equals(Information entity) {
+		return identifiant.equals(entity.getIdentifiant());
 	}
 	
 	

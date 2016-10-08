@@ -20,14 +20,15 @@ public class Structure extends GenericEntity<Structure>{
 	@Column(unique=true, nullable=false)
 	private String libelle;
 	
-	@OneToMany(mappedBy="structure")
-	private List<Information> informations;	
-	
 	@ManyToOne
 	private Structure structureMere;
 	
 	@OneToMany(mappedBy="structureMere")
 	private List<Structure> structuresFilles;	
+	
+	@OneToMany(mappedBy="structure")
+	private List<Equipe> equipes;
+	
 
 	@Override
 	public Long getIdentifiant() {
@@ -52,14 +53,6 @@ public class Structure extends GenericEntity<Structure>{
 		this.libelle = libelle;
 	}
 
-	public List<Information> getInformations() {
-		return informations;
-	}
-
-	public void setInformations(List<Information> informations) {
-		this.informations = informations;
-	}
-
 	public Structure getStructureMere() {
 		return structureMere;
 	}
@@ -76,13 +69,21 @@ public class Structure extends GenericEntity<Structure>{
 		this.structuresFilles = structuresFilles;
 	}
 	
+	public List<Equipe> getEquipes() {
+		return equipes;
+	}
+
+	public void setEquipes(List<Equipe> equipes) {
+		this.equipes = equipes;
+	}
+	
 	@Override
 	public void setAll(Structure entity) {
 		if(entity!=null){
 			this.setLibelle(entity.getLibelle());
-			this.setInformations(entity.getInformations());
 			this.setStructureMere(entity.getStructureMere());
 			this.setStructuresFilles(entity.getStructuresFilles());
+			this.setEquipes(entity.getEquipes());
 		}
 	}
 
@@ -104,6 +105,8 @@ public class Structure extends GenericEntity<Structure>{
 	public String toString() {
 		return this.libelle;
 	}
+
+	
 	
 	
 	

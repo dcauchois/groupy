@@ -20,7 +20,7 @@ public class Information extends GenericEntity<Information> {
 	private Date date;
 	
 	@ManyToOne
-	private Structure structure;
+	private Equipe equipe;
 	
 	@ManyToOne
 	private Utilisateur rapporteur;
@@ -40,6 +40,15 @@ public class Information extends GenericEntity<Information> {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+
 
 	public Utilisateur getRapporteur() {
 		return rapporteur;
@@ -62,6 +71,7 @@ public class Information extends GenericEntity<Information> {
 		if(entity!=null){
 			this.setDate(entity.getDate());
 			this.setCommentaire(entity.getCommentaire());
+			this.setEquipe(entity.getEquipe());
 			this.setRapporteur(entity.getRapporteur());
 		}
 	}

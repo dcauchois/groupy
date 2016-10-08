@@ -1,8 +1,12 @@
 package groupy.entity;
 
+import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 public class Equipe extends GenericEntity<Equipe> {
 
@@ -12,7 +16,11 @@ public class Equipe extends GenericEntity<Equipe> {
 	
 	private String libelle;
 	
+	@ManyToOne
 	private Structure structure;
+	
+	@OneToMany
+	private List<Information> informations;
 	
 	@Override
 	public Long getIdentifiant() {
@@ -24,6 +32,7 @@ public class Equipe extends GenericEntity<Equipe> {
 		if(entity!=null){
 			this.setLibelle(entity.getLibelle());
 			this.setStructure(entity.getStructure());
+			this.setInformations(entity.getInformations());
 		}
 	}
 
@@ -52,6 +61,14 @@ public class Equipe extends GenericEntity<Equipe> {
 
 	public void setStructure(Structure structure) {
 		this.structure = structure;
+	}
+
+	public List<Information> getInformations() {
+		return informations;
+	}
+
+	public void setInformations(List<Information> informations) {
+		this.informations = informations;
 	}
 
 	
